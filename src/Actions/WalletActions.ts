@@ -29,6 +29,9 @@ class WalletActions {
     }
     /**
      * Action for getting data from API
+     * json-server implimented for local api call
+     * create separate json-server using npm json-server package
+     * https://www.npmjs.com/package/json-server for more reference.
      */
     public getDataFromRestAPI(){
         const url: string = 'http://localhost:3000/posts';
