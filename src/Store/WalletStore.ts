@@ -78,7 +78,7 @@ class WalletStore extends EventEmitter {
 	 * @param data 
 	 */
 	public _addInsertAPIdata(data: any) {
-		_apiData.posts = data;
+		_apiData.posts = _apiData.posts.concat(data);
 		this.emit(CHANGE);
 	}
 	/**

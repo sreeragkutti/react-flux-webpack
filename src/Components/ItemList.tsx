@@ -19,7 +19,7 @@ class ItemsList extends React.Component<any, any> {
      * _onChange
      */
     public _onChange() {
-        this.setState({ items: WalletStore.getAllItems(), profile: WalletStore._getAllAPIData()});
+        this.setState({ items: WalletStore.getAllItems(), posts: WalletStore._getAllAPIData()});
     }
     /**
      * componentWillMount
@@ -65,7 +65,7 @@ class ItemsList extends React.Component<any, any> {
                     {
                         this.state.posts.map((d: any) => {
                             return(
-                                <li key={d.id}>{d.author}</li>
+                                <li key={d.id}><span className='positive'>{d.title}</span>{d.author}</li>
                             );
                         })
                     }
