@@ -1,5 +1,6 @@
 import React from 'react';
 import WalletActions from '../Actions/WalletActions';
+import WalletStore from '../Store/WalletStore';
 
 /**
  * Component for adding new Item
@@ -9,9 +10,15 @@ class AddNewItem extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this._getFreshItem = this._getFreshItem.bind(this);
+        this._getTotal = this._getTotal.bind(this);
         this.state = {
             item : this._getFreshItem(),
+            total: 0,
         };
+    }
+    // tslint:disable-next-line:completed-docs
+    public componentWillMount(){
+        WalletStore.addChangeListener(this._getTotal);
     }
     /**
      * _getFreshItem
@@ -21,6 +28,12 @@ class AddNewItem extends React.Component<any, any> {
             amount: '',
             description: '',
         };
+    }
+    /**
+     * get total wallet amount
+     */
+    public _getTotal(){
+        this.setState({total: WalletStore.getTotalBudget()});
     }
     /**
      * _updateState
@@ -46,7 +59,7 @@ class AddNewItem extends React.Component<any, any> {
         this.state.item.description = this.state.item.description || '-';
         this.state.item.amount = this.state.item.amount || '0';
         WalletActions.addNewItem(this.state.item);
-        this.setState({ item : this._getFreshItem() });
+        this.setState({ item : this._getFreshItem()});
     }
     /**
      * Render method
@@ -54,7 +67,7 @@ class AddNewItem extends React.Component<any, any> {
     public render() {
         return (
             <div>
-                <h3 className='total-budget'>$0</h3>
+                <h3 className='total-budget'>${this.state.total}</h3>
                 <form className='form-inline add-item' onSubmit={this._addNewItem.bind(this)}>
                     <input type='text' className='form-control description'
                     name='description' value={this.state.item.description}

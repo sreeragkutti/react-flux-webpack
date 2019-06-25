@@ -1,3 +1,5 @@
 export default {
     ADD_NEW_ITEM: 'ADD_NEW_ITEM',
+    DELETE_ONE_ROW: 'DELETE_ONE_ROW',
+    GET_TOTAL_BUDGET: 'GET_TOTAL_BUDGET',
 };

@@ -25,7 +25,10 @@ class WalletStore extends EventEmitter {
 		switch (action.actionType) {
 			case ActionTypes.ADD_NEW_ITEM:
 				this._addNewItem(action.payload);
-			 break;
+				break;
+			// case ActionTypes.GET_TOTAL_BUDGET:
+			// 	this.getTotalBudget();
+			// 	break;
 		}
 	}
 	/**

@@ -31,6 +31,12 @@ class ItemsList extends React.Component<any, any> {
         WalletStore.removeChangeListener(this._onChange);
     }
     /**
+     * Delete item function
+     */
+    public _onDelete(rowId: number){
+        // 
+    }
+    /**
      * Render method
      */
     public render() {
@@ -40,14 +46,16 @@ class ItemsList extends React.Component<any, any> {
             noItemsMessage = (<li className='no-items'>Your wallet is new!</li>);
         }
         return (
-            <ul className='items-list'>
-                {noItemsMessage}
-                {this.state.items.map((itemDetails: any) => {
-                    const amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
-                    return (<li key={itemDetails.id}>{itemDetails.description}
-                    <span className={amountType}>{itemDetails.amount}</span></li>);
-                })}
-            </ul>
+            <React.Fragment>
+                <ul className='items-list'>
+                    {noItemsMessage}
+                    {this.state.items.map((itemDetails: any) => {
+                        const amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
+                        return (<li key={itemDetails.id}>{itemDetails.description}
+                        <span className={amountType}>{itemDetails.amount}</span></li>);
+                    })}
+                </ul>
+            </React.Fragment>
         );
     }
 }

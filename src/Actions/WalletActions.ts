@@ -16,5 +16,15 @@ class WalletActions {
             payload: item,
         });
     }
+    /**
+     * Delete one row
+     * @param rowId 
+     */
+    public deleteNewItem(rowId: number){
+        Dispatcher.dispatch({
+            actionType: ActionTypes.DELETE_ONE_ROW,
+            payload: rowId,
+        });
+    }
 }
 export default new WalletActions();
