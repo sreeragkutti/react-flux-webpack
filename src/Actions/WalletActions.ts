@@ -1,3 +1,4 @@
+const axios = require('axios');
 import ActionTypes from '../Constants/Constants';
 import Dispatcher from '../Dispatcher/Index';
 
@@ -24,6 +25,18 @@ class WalletActions {
         Dispatcher.dispatch({
             actionType: ActionTypes.DELETE_ONE_ROW,
             payload: rowId,
+        });
+    }
+    /**
+     * Action for getting data from API
+     */
+    public getDataFromRestAPI(){
+        const url: string = 'http://localhost:3000/posts';
+        axios.get(url).then((res: any) => {
+            Dispatcher.dispatch({
+                actionType: ActionTypes.GET_DATA_FROM_API_CALL,
+                payload: res.data,
+            });
         });
     }
 }

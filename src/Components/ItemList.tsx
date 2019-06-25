@@ -10,6 +10,7 @@ class ItemsList extends React.Component<any, any> {
         super(props);
         this.state = {
             items: WalletStore.getAllItems(),
+            posts: WalletStore._getAllAPIData(),
         };
         this._onChange = this._onChange.bind(this);
         this._onDelete = this._onDelete.bind(this);
@@ -18,7 +19,7 @@ class ItemsList extends React.Component<any, any> {
      * _onChange
      */
     public _onChange() {
-        this.setState({ items: WalletStore.getAllItems() });
+        this.setState({ items: WalletStore.getAllItems(), profile: WalletStore._getAllAPIData()});
     }
     /**
      * componentWillMount
@@ -59,6 +60,17 @@ class ItemsList extends React.Component<any, any> {
                         <button className='btn btn-danger' onClick={(e) => this._onDelete(e, itemDetails.id)}>Delete</button></li>);
                     })}
                 </ul>
+                <div className='container'>
+                <ul className='items-list'>
+                    {
+                        this.state.posts.map((d: any) => {
+                            return(
+                                <li key={d.id}>{d.author}</li>
+                            );
+                        })
+                    }
+                    </ul>
+                </div>
             </React.Fragment>
         );
     }

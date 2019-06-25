@@ -11,6 +11,7 @@ class AddNewItem extends React.Component<any, any> {
         super(props);
         this._getFreshItem = this._getFreshItem.bind(this);
         this._getTotal = this._getTotal.bind(this);
+        this._getDataFromRestAPI = this._getDataFromRestAPI.bind(this);
         this.state = {
             item : this._getFreshItem(),
             total: 0,
@@ -64,6 +65,12 @@ class AddNewItem extends React.Component<any, any> {
         this.setState({ item : this._getFreshItem()});
     }
     /**
+     * _getDataFromRestAPI
+     */
+    public _getDataFromRestAPI(){
+        WalletActions.getDataFromRestAPI();
+    }
+    /**
      * Render method
      */
     public render() {
@@ -82,6 +89,7 @@ class AddNewItem extends React.Component<any, any> {
                     </div>
                     <button type='submit' className='btn btn-primary add'>Add</button>
                 </form>
+                <button className='btn btn-default' onClick={this._getDataFromRestAPI}>JUST FOR FUN</button>
             </div>
         );
     }

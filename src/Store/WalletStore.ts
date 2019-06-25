@@ -4,6 +4,9 @@ import Dispatcher from '../Dispatcher/Index';
 
 const CHANGE = 'CHANGE';
 const _walletState: any = [];
+const _apiData: any = {
+	posts: [],
+};
 
 /**
  * WalletStore
@@ -28,6 +31,9 @@ class WalletStore extends EventEmitter {
 				break;
 			case ActionTypes.DELETE_ONE_ROW:
 				this._deleteSelectedRow(action.payload);
+				break;
+			case ActionTypes.GET_DATA_FROM_API_CALL:
+				this._addInsertAPIdata(action.payload);
 				break;
 		}
 	}
@@ -66,6 +72,21 @@ class WalletStore extends EventEmitter {
 		const rowNumber: number = _walletState.findIndex((item: any) => item.id === rowId);
 		_walletState.splice(rowNumber, 1);
 		this.emit(CHANGE);
+	}
+	/**
+	 * _addInsertAPIdata
+	 * @param data 
+	 */
+	public _addInsertAPIdata(data: any) {
+		_apiData.posts = data;
+		this.emit(CHANGE);
+	}
+	/**
+	 * Get all profiles
+	 * @param callback
+	 */
+	public _getAllAPIData(){
+		return _apiData.posts;
 	}
 	/**
 	 *  Hooks a React component's callback to the CHANGE event.
