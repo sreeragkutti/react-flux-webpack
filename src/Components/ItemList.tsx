@@ -55,7 +55,8 @@ class ItemsList extends React.Component<any, any> {
                     {this.state.items.map((itemDetails: any) => {
                         const amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
                         return (<li key={itemDetails.id}>{itemDetails.description}
-                        <span onClick={(e) => this._onDelete(e, itemDetails.id)} className={amountType}>{itemDetails.amount}</span></li>);
+                        <span className={amountType}>{itemDetails.amount}</span>
+                        <button className='btn btn-danger' onClick={(e) => this._onDelete(e, itemDetails.id)}>Delete</button></li>);
                     })}
                 </ul>
             </React.Fragment>

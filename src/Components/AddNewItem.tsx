@@ -16,7 +16,9 @@ class AddNewItem extends React.Component<any, any> {
             total: 0,
         };
     }
-    // tslint:disable-next-line:completed-docs
+    /**
+     * componentWillMount
+     */
     public componentWillMount(){
         WalletStore.addChangeListener(this._getTotal);
     }
