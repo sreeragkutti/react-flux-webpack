@@ -1,4 +1,5 @@
 import React from 'react';
+import WalletActions from '../Actions/WalletActions';
 import WalletStore from '../Store/WalletStore';
 
 /**
@@ -11,6 +12,7 @@ class ItemsList extends React.Component<any, any> {
             items: WalletStore.getAllItems(),
         };
         this._onChange = this._onChange.bind(this);
+        this._onDelete = this._onDelete.bind(this);
     }
     /**
      * _onChange
@@ -33,8 +35,9 @@ class ItemsList extends React.Component<any, any> {
     /**
      * Delete item function
      */
-    public _onDelete(rowId: number){
-        // 
+    public _onDelete(e: any, rowId: number){
+        e.preventDefault();
+        WalletActions.deleteNewItem(rowId);
     }
     /**
      * Render method
@@ -52,7 +55,7 @@ class ItemsList extends React.Component<any, any> {
                     {this.state.items.map((itemDetails: any) => {
                         const amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
                         return (<li key={itemDetails.id}>{itemDetails.description}
-                        <span className={amountType}>{itemDetails.amount}</span></li>);
+                        <span onClick={(e) => this._onDelete(e, itemDetails.id)} className={amountType}>{itemDetails.amount}</span></li>);
                     })}
                 </ul>
             </React.Fragment>

@@ -26,9 +26,9 @@ class WalletStore extends EventEmitter {
 			case ActionTypes.ADD_NEW_ITEM:
 				this._addNewItem(action.payload);
 				break;
-			// case ActionTypes.GET_TOTAL_BUDGET:
-			// 	this.getTotalBudget();
-			// 	break;
+			case ActionTypes.DELETE_ONE_ROW:
+				this._deleteSelectedRow(action.payload);
+				break;
 		}
 	}
 	/**
@@ -57,6 +57,15 @@ class WalletStore extends EventEmitter {
 		});
 
 		return totalBudget;
+	}
+	/**
+	 * deleteSelectedRow
+	 * @param rowId 
+	 */
+	public _deleteSelectedRow(rowId: number) {
+		const rowNumber: number = _walletState.findIndex((item: any) => item.id === rowId);
+		_walletState.splice(rowNumber, 1);
+		this.emit(CHANGE);
 	}
 	/**
 	 *  Hooks a React component's callback to the CHANGE event.
